@@ -1,4 +1,4 @@
-const generateActionChoices = ({ username }) => {
+const generateActionChoices = (username) => {
   return [
     {
       name: `Display information about ${username}`,

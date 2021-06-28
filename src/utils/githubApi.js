@@ -12,7 +12,7 @@ const displayUserInfo = async (username) => {
 
   const result = transformUserInfo(dataFromGitHubApi);
 
-  console.table(result);
+  console.log(result);
 };
 
 const listAllRepositories = async (username, params) => {
