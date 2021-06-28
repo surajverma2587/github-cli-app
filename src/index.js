@@ -34,6 +34,13 @@ const app = async () => {
       per_page: 10,
     });
   }
+
+  if (action === "getRecentlyUpdatedRepos") {
+    await listAllRepositories(username, {
+      sort: "updated",
+      per_page: 10,
+    });
+  }
 };
 
 app();
