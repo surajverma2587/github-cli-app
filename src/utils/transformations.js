@@ -17,6 +17,27 @@ const transformUserInfo = (data) => {
   };
 };
 
+const transformRepositories = (data) => {
+  return data.map((repository) => {
+    return {
+      name: repository.name,
+      private: repository.private,
+      repoUrl: repository.html_url,
+      username: repository.owner.login,
+      profileUrl: repository.owner.html_url,
+      description: repository.description,
+      created: formatDate(repository.created_at),
+      updated: formatDate(repository.updated_at),
+      pushed: formatDate(repository.pushed_at),
+      homepage: repository.homepage,
+      issues: repository.open_issues,
+      license: repository.license,
+      default_branch: repository.default_branch,
+    };
+  });
+};
+
 module.exports = {
   transformUserInfo,
+  transformRepositories,
 };

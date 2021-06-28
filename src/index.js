@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 
 const { generateActionChoices } = require("./utils/choices");
-const { displayUserInfo } = require("./utils/githubApi");
+const { displayUserInfo, listAllRepositories } = require("./utils/githubApi");
 
 const app = async () => {
   const questions = [
@@ -22,6 +22,10 @@ const app = async () => {
 
   if (action === "getUserInfo") {
     await displayUserInfo(username);
+  }
+
+  if (action === "getAllRepos") {
+    await listAllRepositories(username);
   }
 };
 
