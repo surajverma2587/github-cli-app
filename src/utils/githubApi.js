@@ -2,6 +2,7 @@ const { fetchDataFromGitHub } = require("./fetchers");
 const {
   transformUserInfo,
   transformRepositories,
+  transformUserFollowers,
 } = require("./transformations");
 
 const displayUserInfo = async (username) => {
@@ -25,7 +26,18 @@ const listAllRepositories = async (username, params) => {
   console.log(result);
 };
 
+const listAllFollowers = async (username) => {
+  const dataFromGitHubApi = await fetchDataFromGitHub(
+    `https://api.github.com/users/${username}/followers`
+  );
+
+  const result = transformUserFollowers(dataFromGitHubApi);
+
+  console.log(result);
+};
+
 module.exports = {
   displayUserInfo,
   listAllRepositories,
+  listAllFollowers,
 };

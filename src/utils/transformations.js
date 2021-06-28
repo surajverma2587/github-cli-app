@@ -37,7 +37,19 @@ const transformRepositories = (data) => {
   });
 };
 
+const transformUserFollowers = (data) => {
+  return data.map((follower) => {
+    return {
+      type: follower.type,
+      avatar: follower.avatar_url,
+      username: follower.login,
+      profileUrl: follower.html_url,
+    };
+  });
+};
+
 module.exports = {
   transformUserInfo,
   transformRepositories,
+  transformUserFollowers,
 };

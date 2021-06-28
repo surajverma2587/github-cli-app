@@ -1,7 +1,11 @@
 const inquirer = require("inquirer");
 
 const { generateActionChoices } = require("./utils/choices");
-const { displayUserInfo, listAllRepositories } = require("./utils/githubApi");
+const {
+  displayUserInfo,
+  listAllRepositories,
+  listAllFollowers,
+} = require("./utils/githubApi");
 
 const app = async () => {
   const questions = [
@@ -40,6 +44,10 @@ const app = async () => {
       sort: "updated",
       per_page: 10,
     });
+  }
+
+  if (action === "getFollowers") {
+    await listAllFollowers(username);
   }
 };
 
