@@ -27,6 +27,13 @@ const app = async () => {
   if (action === "getAllRepos") {
     await listAllRepositories(username);
   }
+
+  if (action === "getRecentlyCreatedRepos") {
+    await listAllRepositories(username, {
+      sort: "created",
+      per_page: 10,
+    });
+  }
 };
 
 app();

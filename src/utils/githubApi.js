@@ -14,9 +14,10 @@ const displayUserInfo = async (username) => {
   console.table(result);
 };
 
-const listAllRepositories = async (username) => {
+const listAllRepositories = async (username, params) => {
   const dataFromGitHubApi = await fetchDataFromGitHub(
-    `https://api.github.com/users/${username}/repos`
+    `https://api.github.com/users/${username}/repos`,
+    params
   );
 
   const result = transformRepositories(dataFromGitHubApi);
