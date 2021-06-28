@@ -1,0 +1,29 @@
+{
+  "name": "github-cli-app",
+  "version": "1.0.0",
+  "description": "Build a CLI tool to interact with GitHub API and provide the user with a list of actions to perform for a given GitHub username and/or repository using the terminal.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest --verbose --coverage",
+    "test:watch": "jest --verbose --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surajverma2587/github-cli-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/surajverma2587/github-cli-app/issues"
+  },
+  "homepage": "https://github.com/surajverma2587/github-cli-app#readme",
+  "dependencies": {
+    "inquirer": "^8.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "jest": "^27.0.6"
+  }
+}
