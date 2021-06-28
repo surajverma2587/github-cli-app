@@ -357,15 +357,15 @@ THEN I am presented with the information about 10 recent commits for a repositor
 ```json
 [
   {
-    "sha": "dbf0945cf29540727e00995f23633a7f5c6b0b8b",
-    "message": "refactor code",
+    "sha": "some sha",
+    "message": "some message",
     "url": "some_url",
     "committer": {
-      "name": "Suraj Verma",
-      "email": "surajverma@rentalcars.com",
+      "name": "some name",
+      "email": "some email",
       "date": "24th Jun, 2020",
       "avatar_url": "some_url",
-      "username": "surajverma2587"
+      "username": "<user_name>"
     }
   } ...
 ]
