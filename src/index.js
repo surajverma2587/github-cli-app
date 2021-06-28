@@ -10,53 +10,62 @@ const {
 let mainAppInProgress = true;
 
 const app = async () => {
-  const usernameQuestion = {
-    type: "input",
-    message: "Enter a GitHub username:",
-    name: "username",
-    default: "surajverma2587",
-  };
-
-  const { username } = await inquirer.prompt(usernameQuestion);
-
   while (mainAppInProgress) {
-    const actionQuestion = {
-      type: "list",
-      message: "Select an action:",
-      choices: generateActionChoices(username),
-      name: "action",
+    const usernameQuestion = {
+      type: "input",
+      message: "Enter a GitHub username:",
+      name: "username",
+      default: "surajverma2587",
     };
 
-    const { action } = await inquirer.prompt(actionQuestion);
+    const { username } = await inquirer.prompt(usernameQuestion);
 
-    if (action === "getUserInfo") {
-      await displayUserInfo(username);
-    }
+    let promptMainActions = true;
 
-    if (action === "getAllRepos") {
-      await listAllRepositories(username);
-    }
+    while (promptMainActions) {
+      const actionQuestion = {
+        type: "list",
+        message: "Select an action:",
+        choices: generateActionChoices(username),
+        name: "action",
+      };
 
-    if (action === "getRecentlyCreatedRepos") {
-      await listAllRepositories(username, {
-        sort: "created",
-        per_page: 10,
-      });
-    }
+      const { action } = await inquirer.prompt(actionQuestion);
 
-    if (action === "getRecentlyUpdatedRepos") {
-      await listAllRepositories(username, {
-        sort: "updated",
-        per_page: 10,
-      });
-    }
+      if (action === "getUserInfo") {
+        await displayUserInfo(username);
+      }
 
-    if (action === "getFollowers") {
-      await listAllFollowers(username);
-    }
+      if (action === "getAllRepos") {
+        await listAllRepositories(username);
+      }
 
-    if (action === "exit") {
-      mainAppInProgress = false;
+      if (action === "getRecentlyCreatedRepos") {
+        await listAllRepositories(username, {
+          sort: "created",
+          per_page: 10,
+        });
+      }
+
+      if (action === "getRecentlyUpdatedRepos") {
+        await listAllRepositories(username, {
+          sort: "updated",
+          per_page: 10,
+        });
+      }
+
+      if (action === "getFollowers") {
+        await listAllFollowers(username);
+      }
+
+      if (action === "differentUsername") {
+        promptMainActions = false;
+      }
+
+      if (action === "exit") {
+        mainAppInProgress = false;
+        promptMainActions = false;
+      }
     }
   }
 
