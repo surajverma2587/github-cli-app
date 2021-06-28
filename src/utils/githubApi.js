@@ -7,7 +7,7 @@ const {
 
 const displayUserInfo = async (username) => {
   const dataFromGitHubApi = await fetchDataFromGitHub(
-    `https://api.github.com/userssfas/${username}`
+    `https://api.github.com/users/${username}`
   );
 
   const result = transformUserInfo(dataFromGitHubApi);
