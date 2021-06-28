@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 
 const { generateActionChoices } = require("./utils/choices");
+const { displayUserInfo } = require("./utils/githubApi");
 
 const app = async () => {
   const questions = [
@@ -17,9 +18,11 @@ const app = async () => {
     },
   ];
 
-  const answers = await inquirer.prompt(questions);
+  const { username, action } = await inquirer.prompt(questions);
 
-  console.log(answers);
+  if (action === "getUserInfo") {
+    await displayUserInfo(username);
+  }
 };
 
 app();

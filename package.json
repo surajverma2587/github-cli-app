@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/surajverma2587/github-cli-app#readme",
   "dependencies": {
-    "inquirer": "^8.1.1"
+    "axios": "^0.21.1",
+    "inquirer": "^8.1.1",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
