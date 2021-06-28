@@ -60,7 +60,9 @@ const app = async () => {
     }
   }
 
-  console.log("END");
+  console.log(
+    `🚀 Thank you using the GitHub CLI app \n🚀 Why not take a look at the open source code here https://github.com/surajverma2587/github-cli-app`
+  );
 };
 
 app();
