@@ -5,6 +5,7 @@ const {
   displayUserInfo,
   listAllRepositories,
   listAllFollowers,
+  listRepository,
 } = require("./utils/githubApi");
 
 let mainAppInProgress = true;
@@ -56,6 +57,56 @@ const app = async () => {
 
       if (action === "getFollowers") {
         await listAllFollowers(username);
+      }
+
+      if (action === "getRepoByName") {
+        const repositoryQuestions = [
+          {
+            type: "list",
+            message: "How would you like to proceed?",
+            choices: [
+              {
+                name: "Select a repository from a list for foobar",
+                value: "selectRepoFromList",
+                short: "select repo from list",
+              },
+              {
+                name: "Enter repository name for foobar",
+                value: "getRepoByName",
+                short: "find by repo name",
+              },
+              {
+                name: "Go back to main options",
+                value: "backToMainOptions",
+                short: "back to main",
+              },
+            ],
+            name: "repoAction",
+          },
+        ];
+
+        const { repoAction } = await inquirer.prompt(repositoryQuestions);
+
+        if (repoAction === "selectRepoFromList") {
+          // go and get repos from git
+          // build choices of repos
+        }
+
+        if (repoAction === "getRepoByName") {
+          const question = {
+            type: "input",
+            message: `Enter repository name for ${username}`,
+            name: "repoName",
+          };
+
+          const { repoName } = await inquirer.prompt(question);
+
+          await listRepository(username, repoName);
+        }
+
+        if (repoAction === "backToMainOptions") {
+          // TODO
+        }
       }
 
       if (action === "differentUsername") {
