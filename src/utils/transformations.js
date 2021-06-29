@@ -15,22 +15,23 @@ const transformUserInfo = (data) => ({
   updated: formatDate(data.updated_at),
 });
 
-const transformRepositories = (data) =>
-  data.map((repository) => ({
-    name: repository.name,
-    private: repository.private,
-    repoUrl: repository.html_url,
-    username: repository.owner.login,
-    profileUrl: repository.owner.html_url,
-    description: repository.description,
-    created: formatDate(repository.created_at),
-    updated: formatDate(repository.updated_at),
-    pushed: formatDate(repository.pushed_at),
-    homepage: repository.homepage,
-    issues: repository.open_issues,
-    license: repository.license,
-    default_branch: repository.default_branch,
-  }));
+const transformRepository = (repository) => ({
+  name: repository.name,
+  private: repository.private,
+  repoUrl: repository.html_url,
+  username: repository.owner.login,
+  profileUrl: repository.owner.html_url,
+  description: repository.description,
+  created: formatDate(repository.created_at),
+  updated: formatDate(repository.updated_at),
+  pushed: formatDate(repository.pushed_at),
+  homepage: repository.homepage,
+  issues: repository.open_issues,
+  license: repository.license,
+  default_branch: repository.default_branch,
+});
+
+const transformRepositories = (data) => data.map(transformRepository);
 
 const transformUserFollowers = (data) =>
   data.map((follower) => ({
@@ -42,6 +43,7 @@ const transformUserFollowers = (data) =>
 
 module.exports = {
   transformUserInfo,
+  transformRepository,
   transformRepositories,
   transformUserFollowers,
 };
