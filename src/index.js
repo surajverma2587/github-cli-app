@@ -72,12 +72,12 @@ const app = async () => {
             message: "How would you like to proceed?",
             choices: [
               {
-                name: "Select a repository from a list for foobar",
+                name: `Select a repository from a list for ${username}`,
                 value: "selectRepoFromList",
                 short: "select repo from list",
               },
               {
-                name: "Enter repository name for foobar",
+                name: `Enter repository name for ${username}`,
                 value: "getRepoByName",
                 short: "find by repo name",
               },
@@ -91,47 +91,51 @@ const app = async () => {
           },
         ];
 
-        const { repoAction } = await inquirer.prompt(repositoryQuestions);
+        let promptRepoActions = true;
 
-        if (repoAction === "selectRepoFromList") {
-          const repositories = await listAllRepositories(username, {
-            sort: "updated",
-          });
+        while (promptRepoActions) {
+          const { repoAction } = await inquirer.prompt(repositoryQuestions);
 
-          const choices = repositories.map((repository) => {
-            return {
-              name: repository.name,
-              value: repository.name,
-              short: repository.name,
+          if (repoAction === "selectRepoFromList") {
+            const repositories = await listAllRepositories(username, {
+              sort: "updated",
+            });
+
+            const choices = repositories.map((repository) => {
+              return {
+                name: repository.name,
+                value: repository.name,
+                short: repository.name,
+              };
+            });
+
+            const question = {
+              type: "list",
+              message: "Select the repository:",
+              choices,
+              name: "repoName",
             };
-          });
 
-          const question = {
-            type: "list",
-            message: "Select the repository:",
-            choices,
-            name: "repoName",
-          };
+            const { repoName } = await inquirer.prompt(question);
 
-          const { repoName } = await inquirer.prompt(question);
+            await listRepository(username, repoName);
+          }
 
-          await listRepository(username, repoName);
-        }
+          if (repoAction === "getRepoByName") {
+            const question = {
+              type: "input",
+              message: `Enter repository name for ${username}`,
+              name: "repoName",
+            };
 
-        if (repoAction === "getRepoByName") {
-          const question = {
-            type: "input",
-            message: `Enter repository name for ${username}`,
-            name: "repoName",
-          };
+            const { repoName } = await inquirer.prompt(question);
 
-          const { repoName } = await inquirer.prompt(question);
+            await listRepository(username, repoName);
+          }
 
-          await listRepository(username, repoName);
-        }
-
-        if (repoAction === "backToMainOptions") {
-          // TODO
+          if (repoAction === "backToMainOptions") {
+            promptRepoActions = false;
+          }
         }
       }
 
