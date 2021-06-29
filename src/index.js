@@ -38,21 +38,27 @@ const app = async () => {
       }
 
       if (action === "getAllRepos") {
-        await listAllRepositories(username);
+        const result = await listAllRepositories(username);
+
+        console.log(result);
       }
 
       if (action === "getRecentlyCreatedRepos") {
-        await listAllRepositories(username, {
+        const result = await listAllRepositories(username, {
           sort: "created",
           per_page: 10,
         });
+
+        console.log(result);
       }
 
       if (action === "getRecentlyUpdatedRepos") {
-        await listAllRepositories(username, {
+        const result = await listAllRepositories(username, {
           sort: "updated",
           per_page: 10,
         });
+
+        console.log(result);
       }
 
       if (action === "getFollowers") {
@@ -88,8 +94,28 @@ const app = async () => {
         const { repoAction } = await inquirer.prompt(repositoryQuestions);
 
         if (repoAction === "selectRepoFromList") {
-          // go and get repos from git
-          // build choices of repos
+          const repositories = await listAllRepositories(username, {
+            sort: "updated",
+          });
+
+          const choices = repositories.map((repository) => {
+            return {
+              name: repository.name,
+              value: repository.name,
+              short: repository.name,
+            };
+          });
+
+          const question = {
+            type: "list",
+            message: "Select the repository:",
+            choices,
+            name: "repoName",
+          };
+
+          const { repoName } = await inquirer.prompt(question);
+
+          await listRepository(username, repoName);
         }
 
         if (repoAction === "getRepoByName") {

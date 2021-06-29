@@ -24,7 +24,7 @@ const listAllRepositories = async (username, params) => {
 
   const result = transformRepositories(dataFromGitHubApi);
 
-  console.log(result);
+  return result;
 };
 
 const listAllFollowers = async (username) => {
